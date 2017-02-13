@@ -9,7 +9,7 @@ Based upon the original Docker guide found [here](https://hub.docker.com/_/sentr
 ## How this works
 
 1. Clone this repo into a directory called `sentry`
-1. Run `$ ./gen-dotenv.sh` to create a `.env` that holds the secrets
+1. Run `$ ./gen-dotenv.sh` to create a `.env` file that holds the secrets
 1. Run `# docker-compose up -d` and wait for it to finish
 1. Set up the database and create the first user: `# docker-compose run sentry sentry upgrade`
 1. Be amazed at how much time you saved setting up Sentry by following this guide

@@ -17,7 +17,7 @@ services:
     image: "postgres:latest"
     environment:
       - POSTGRES_USER=sentry
-      - POSTGRES_PASSWORD=__SSK__
+      - POSTGRES_PASSWORD=__DBPW__
   redis:
     image: "redis:latest"
   cron:

@@ -1,0 +1,46 @@
+version: '2'
+services:
+  sentry:
+    image: "sentry:latest"
+    ports:
+      - "9000:9000"
+    links:
+      - postgres
+      - redis
+    environment:
+      - SENTRY_SECRET_KEY=__SSK__
+      - SENTRY_REDIS_HOST=redis
+      - SENTRY_POSTGRES_HOST=postgres
+      - SENTRY_DB_USER=sentry
+      - SENTRY_DB_PASSWORD=__DBPW__
+  postgres:
+    image: "postgres:latest"
+    environment:
+      - POSTGRES_USER=sentry
+      - POSTGRES_PASSWORD=__SSK__
+  redis:
+    image: "redis:latest"
+  cron:
+    image: "sentry:latest"
+    entrypoint: "./entrypoint.sh run cron"
+    links:
+      - postgres
+      - redis
+    environment:
+      - SENTRY_SECRET_KEY=__SSK__
+      - SENTRY_REDIS_HOST=redis
+      - SENTRY_POSTGRES_HOST=postgres
+      - SENTRY_DB_USER=sentry
+      - SENTRY_DB_PASSWORD=__DBPW__
+  worker:
+    image: "sentry:latest"
+    entrypoint: "./entrypoint.sh run worker"
+    links:
+      - postgres
+      - redis
+    environment:
+      - SENTRY_SECRET_KEY=__SSK__
+      - SENTRY_REDIS_HOST=redis
+      - SENTRY_POSTGRES_HOST=postgres
+      - SENTRY_DB_USER=sentry
+      - SENTRY_DB_PASSWORD=__DBPW__

@@ -8,16 +8,16 @@ services:
       - postgres
       - redis
     environment:
-      - SENTRY_SECRET_KEY=__SSK__
+      - SENTRY_SECRET_KEY=${SSK}
       - SENTRY_REDIS_HOST=redis
       - SENTRY_POSTGRES_HOST=postgres
       - SENTRY_DB_USER=sentry
-      - SENTRY_DB_PASSWORD=__DBPW__
+      - SENTRY_DB_PASSWORD=${DBPW}
   postgres:
     image: "postgres:latest"
     environment:
       - POSTGRES_USER=sentry
-      - POSTGRES_PASSWORD=__DBPW__
+      - POSTGRES_PASSWORD=${DBPW}
   redis:
     image: "redis:latest"
   cron:
@@ -27,11 +27,11 @@ services:
       - postgres
       - redis
     environment:
-      - SENTRY_SECRET_KEY=__SSK__
+      - SENTRY_SECRET_KEY=${SSK}
       - SENTRY_REDIS_HOST=redis
       - SENTRY_POSTGRES_HOST=postgres
       - SENTRY_DB_USER=sentry
-      - SENTRY_DB_PASSWORD=__DBPW__
+      - SENTRY_DB_PASSWORD=${DBPW}
   worker:
     image: "sentry:latest"
     entrypoint: "./entrypoint.sh run worker"
@@ -39,8 +39,8 @@ services:
       - postgres
       - redis
     environment:
-      - SENTRY_SECRET_KEY=__SSK__
+      - SENTRY_SECRET_KEY=${SSK}
       - SENTRY_REDIS_HOST=redis
       - SENTRY_POSTGRES_HOST=postgres
       - SENTRY_DB_USER=sentry
-      - SENTRY_DB_PASSWORD=__DBPW__
+      - SENTRY_DB_PASSWORD=${DBPW}
